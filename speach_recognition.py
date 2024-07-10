@@ -106,7 +106,16 @@ def recordingVoice():
     audio.writeframes(b"".join(frames))
     audio.close
 
-recordingVoice()
+'''
+Vire a base no sentido horário / Turn the base clockwise
+Vire a base no sentido anti-horário / Turn the base counterclockwise
+Fecha a pinça / Close the clamp
+Abra a pinça / Open the clamp
+Baixe o braço / Down arm / Lower your arm
+Suba o braço / Up arm / Up your arm
+'''
+
+recordingVoice() 
 
 def converttoMp3(audio_path):
     audio = AudioSegment.from_wav(audio_path)

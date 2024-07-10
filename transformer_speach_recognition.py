@@ -1,10 +1,9 @@
 import torch
 import librosa
-from IPython.display import Audio
 
 from transformers import Wav2Vec2ForCTC, Wav2Vec2Tokenizer
 
-file_name = 'output.wav'
+file_name = 'audio.wav'
 
 tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-base-960h")
 model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-base-960h")
