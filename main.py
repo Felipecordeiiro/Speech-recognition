@@ -12,8 +12,8 @@ def speak(text):
 
 def listen_command():
     with sr.Microphone() as source:
-        speak("Listening for commands")
-        print("Listening for commands...")
+        speak("Escutando comandos")
+        print("\nListening for commands...")
         audio = recognizer.listen(source)
         try:
             command = recognizer.recognize_google(audio, language='pt-BR')
@@ -27,8 +27,8 @@ def listen_command():
             return None
 
 def execute_command(command):
-    if "código principal" in command:
-        script_path = "" # C:\\Users\\..\\speach-recognition\\model.py
+    if "código principal" in command or "principal" in command:
+        script_path = "model.py" 
         speak("Iniciando o reconhecimento de voz do robô")
         os.system(f"python {script_path}")
 
