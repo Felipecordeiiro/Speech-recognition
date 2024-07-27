@@ -13,7 +13,7 @@ def speak(text):
     engine.runAndWait()
 
 # Configure o modelo Vosk (baixe um modelo adequado para seu idioma)
-new_model = vosk.Model("vosk-model-small-pt-0.3")
+new_model = vosk.Model("models/vosk-model-small-pt-0.3")
 rec = vosk.KaldiRecognizer(new_model, 16000)
 
 # Configure o PyAudio
