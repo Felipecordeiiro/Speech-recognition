@@ -2,10 +2,10 @@
 # modelo retorne uma palavra errada, mas semelhante a alguma chave existente.
 # ANALISAR SE FAZ SENTIDO TER ESSE DICT!
 
-commands = {
-    'Ligar': 1,
-    'Desligar': 0,
-}
+commands = [
+    'Ligar',
+    'Desligar',
+]
 
 DATA_PAYLOAD = 2048
 SERVER_ADDRESS = ('localhost', 12345)

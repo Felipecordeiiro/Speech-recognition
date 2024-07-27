@@ -1,39 +1,8 @@
-import serial
 import socket
 from setup import *
+from microcontrollers import arduino
 """ socket client (command) -> socket server (listen + send signals) -> arduino -> ... """
 
-
-class ArduinoError(Exception):
-    def __init__(self, msg):
-        self.msg = msg
-
-    def __str__(self):
-        return f"ArduinoError: {self.mensagem}"
-
-
-def send_to_arduino(command):
-    try:  # Tenta se conectar....
-        arduino = serial.Serial(ARDUINO_SERIAL_PORT, 9600)
-        print('Arduino conectado')
-
-        try: # Tenta enviar....
-            if command == 'l': #Se a resposta for "l", ele envia este comando ao Arduino
-                arduino.write('l'.encode())
-
-            elif command == 'd': #Senão, envia o "d"
-                arduino.write('d'.encode())
-        except ArduinoError('Failed to send to Arduino!') as ae:
-            print(str(ae))
-
-
-    except ArduinoError('Failed to connect to Arduino!') as ae2:
-        print(str(ae2))
-
-    finally:
-        arduino.flush() #Limpa a comunicação
-
-   
 
 def run_server():
 
@@ -49,17 +18,16 @@ def run_server():
         conn, addr = server_socket.accept()
         print(f"Connected by {addr}")
 
-        data = conn.recv(DATA_PAYLOAD).decode('utf')
+        data = conn.recv(DATA_PAYLOAD).decode('utf-8')
         try:
-            command = commands[data]
-            print(f"Command received: {command}")
-            # send_to_arduino(command)
-            conn.sendall(b"Hello from the server!")
+            command = data
+            print(f'Command received: "{command}". Sending to arduino...')
+            arduino.send_to_arduino(command)
 
         except KeyError:
             conn.sendall(b'ERROR: Invalid Command!')
 
-        except ArduinoError as ae:
+        except arduino.ArduinoError as ae:
             conn.sendall(bytes(f'ERROR: {str(ae)}'))
             
 
