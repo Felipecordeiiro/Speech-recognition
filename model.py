@@ -33,19 +33,19 @@ while True:
         
         ## Comandos
         if "esquerda" in result["text"]:
-            result["text"]
+            print(result["text"])
         elif "direita" in result["text"]:
-            result["text"]
+            print(result["text"])
         elif "baixo" in result["text"]:
-            result["text"]
+            print(result["text"])
         elif "cima" in result["text"]:
-            result["text"]
+            print(result["text"])
         elif "abrir garra" in result["text"]:
-            result["text"]
+            print(result["text"])
         elif "fechar garra" in result["text"]:
-            result["text"]
+            print(result["text"])
         elif "escovação" in result["text"]:
-            result["text"]
+            print(result["text"])
 
 print("Reconhecimento finalizado.")
 
