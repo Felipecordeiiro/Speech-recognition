@@ -30,22 +30,22 @@ while True:
         break
     if rec.AcceptWaveform(data):
         result = json.loads(rec.Result())
-        
+        print(f"Você disse: {result}")
         ## Comandos
         if "esquerda" in result["text"]:
-            print(result["text"])
+            result["text"]
         elif "direita" in result["text"]:
-            print(result["text"])
+            result["text"]
         elif "baixo" in result["text"]:
-            print(result["text"])
+            result["text"]
         elif "cima" in result["text"]:
-            print(result["text"])
+            result["text"]
         elif "abrir garra" in result["text"]:
-            print(result["text"])
+            result["text"]
         elif "fechar garra" in result["text"]:
-            print(result["text"])
+            result["text"]
         elif "escovação" in result["text"]:
-            print(result["text"])
+            result["text"]
 
 print("Reconhecimento finalizado.")
 
