@@ -3,6 +3,13 @@ import pyttsx3
 import vosk
 import pyaudio
 import json
+from colorama import Fore, Back, Style
+from comandos import command_dict
+from control.http import client
+
+# Iniciando colorama
+import colorama
+colorama.init()
 
 # Inicializa o recognizer e o motor de texto para fala
 recognizer = sr.Recognizer()
@@ -30,22 +37,30 @@ while True:
         break
     if rec.AcceptWaveform(data):
         result = json.loads(rec.Result())
+        print('RESULT: ', result)
         
         ## Comandos
         if "esquerda" in result["text"]:
-            print(result["text"])
+            print(Fore.GREEN + f'SENDING COMMAND "{result["text"]}" TO ESP8266: ' + Style.RESET_ALL)
+            client.send_command(command_dict['esquerda'])
         elif "direita" in result["text"]:
-            print(result["text"])
+            print(Fore.GREEN + f'SENDING COMMAND "{result["text"]}" TO ESP8266: ' + Style.RESET_ALL)
+            client.send_command(command_dict['direita'])
         elif "baixo" in result["text"]:
-            print(result["text"])
+            print(Fore.GREEN + f'SENDING COMMAND "{result["text"]}" TO ESP8266: ' + Style.RESET_ALL)
+            client.send_command(command_dict['baixo'])
         elif "cima" in result["text"]:
-            print(result["text"])
+            print(Fore.GREEN + f'SENDING COMMAND "{result["text"]}" TO ESP8266: ' + Style.RESET_ALL)
+            client.send_command(command_dict['cima'])
         elif "abrir garra" in result["text"]:
-            print(result["text"])
+            print(Fore.GREEN + f'SENDING COMMAND "{result["text"]}" TO ESP8266: ' + Style.RESET_ALL)
+            client.send_command(command_dict['abrir garra'])
         elif "fechar garra" in result["text"]:
-            print(result["text"])
+            print(Fore.GREEN + f'SENDING COMMAND "{result["text"]}" TO ESP8266: ' + Style.RESET_ALL)
+            client.send_command(command_dict['fechar garra'])
         elif "escovação" in result["text"]:
-            print(result["text"])
+            print(Fore.GREEN + f'SENDING COMMAND "{result["text"]}" TO ESP8266: ' + Style.RESET_ALL)
+            client.send_command(command_dict['escovação'])
 
 print("Reconhecimento finalizado.")
 

@@ -1,3 +1,0 @@
-Esquerda/Direita
-Baixo/Cima
-Abrir Garra/Fechar Garra
