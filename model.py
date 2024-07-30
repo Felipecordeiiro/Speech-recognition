@@ -37,8 +37,7 @@ while True:
         break
     if rec.AcceptWaveform(data):
         result = json.loads(rec.Result())
-        print('RESULT: ', result)
-        
+        print(f"Você disse: {result}")
         ## Comandos
         if "esquerda" in result["text"]:
             print(Fore.GREEN + f'SENDING COMMAND "{result["text"]}" TO ESP8266: ' + Style.RESET_ALL)
