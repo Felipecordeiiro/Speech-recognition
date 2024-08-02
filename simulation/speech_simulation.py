@@ -34,25 +34,31 @@ def capture_speech(command_queue):
             
             ## Comandos
             if "esquerda" in result["text"]:
-                result["text"]
+                print(result["text"])
                 command_queue.put("esquerda")
             elif "direita" in result["text"]:
-                result["text"]
+                print(result["text"])
                 command_queue.put("direita")
             elif "baixo" in result["text"]:
-                result["text"]
+                print(result["text"])
                 command_queue.put("baixo")
             elif "cima" in result["text"]:
-                result["text"]
+                print(result["text"])
                 command_queue.put("cima")
+            elif "frente" in result["text"]:
+                print(result["text"])
+                command_queue.put("frente")
+            elif "trás" in result["text"]:
+                print(result["text"])
+                command_queue.put("trás")
             elif "abrir" in result["text"]:
-                result["text"]
+                print(result["text"])
                 command_queue.put("abrir")
             elif "fechar" in result["text"]:
-                result["text"]
+                print(result["text"])
                 command_queue.put("fechar")
             elif "escovar" in result["text"]:
-                result["text"]
+                print(result["text"])
                 command_queue.put("escovar")
 
     print("Reconhecimento finalizado.")

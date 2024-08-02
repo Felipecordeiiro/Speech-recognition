@@ -21,7 +21,7 @@ dt = 0.1
 brush_duration = 5 # Tempo da escovação em segundos
 start_time = 0 
 
-def execute_command(command):
+def execute_command(command, sutil):
     if command == "descansar":
         robot.q = robot.qr
         
@@ -75,9 +75,9 @@ def execute_command(command):
             temp = True
         start_time = time.time()
         while time.time() - start_time < brush_duration:
-            execute_command("direita")
+            execute_command("direita", sutil)
             env.step(dt)
-            execute_command("esquerda")
+            execute_command("esquerda", sutil)
             env.step(dt)
 
         if temp: # Se tiver sido colocado no modo sutil apenas temporariamente
@@ -87,28 +87,28 @@ def execute_command(command):
         print("Comando invalido")
 
 
-def process_commands(command_queue):
+def process_commands(command_queue, sutil):
     while True:
         if not command_queue.empty():
             command = command_queue.get()
             if "cima" in command:
-                execute_command("cima")
+                execute_command("cima", sutil)
             elif "baixo" in command:
-                execute_command("baixo")
+                execute_command("baixo", sutil)
             elif "frente" in command:
-                execute_command("frente")
+                execute_command("frente", sutil)
             elif "trás" in command:
-                execute_command("trás")
+                execute_command("trás", sutil)
             elif "esquerda" in command:
-                execute_command("esquerda")
+                execute_command("esquerda", sutil)
             elif "direita" in command:
-                execute_command("direita")
+                execute_command("direita", sutil)
             elif "abrir" in command:
-                execute_command("abrir garra")
+                execute_command("abrir garra", sutil)
             elif "fechar" in command:
-                execute_command("fechar garra")
+                execute_command("fechar garra", sutil)
             elif "escovar" in command:
-                execute_command("escovar")
+                execute_command("escovar", sutil)
             elif "sutil" in command:
                 sutil = not sutil
             elif "parar" in command:
@@ -118,7 +118,8 @@ def process_commands(command_queue):
 
             env.step(dt)
         
-        env.hold()
+
+    env.hold()
 
 #def main():
 #    while True:
@@ -137,7 +138,7 @@ if __name__ == "__main__":
 
     # Create threads for speech recognition and command processing
     speech_thread = threading.Thread(target=ss.capture_speech, args=(command_queue,))
-    command_thread = threading.Thread(target=process_commands, args=(command_queue,))
+    command_thread = threading.Thread(target=process_commands, args=(command_queue, sutil))
 
     # Start the threads
     speech_thread.start()
