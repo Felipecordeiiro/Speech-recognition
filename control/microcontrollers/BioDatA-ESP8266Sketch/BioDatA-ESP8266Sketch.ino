@@ -27,12 +27,12 @@
 #define ServoPIN2 D2
 #define ServoPIN3 D3
 #define ServoPIN4 D4
-#define ServoPIN5 D5
+#define ServoPIN5 D6
 
 
 // Wifi setup
-const char* ssid = "brisa-3464353";
-const char* password = "mtm4xayu";
+const char* ssid = "NETCOMFIBRA_REGINALDO";
+const char* password = "251114223023";
 ESP8266WebServer server(80);
 
 // Define NTP Client to get time
@@ -41,8 +41,8 @@ NTPClient timeClient(ntpUDP, "pool.ntp.org");
 
 // Servos setup
 Servo servo1; // base
-Servo servo2;
-Servo servo3;
+Servo servo2; // cima / baixo
+Servo servo3; // frente / trás
 Servo servo4; // garra
 Servo servo5;
 
@@ -84,7 +84,7 @@ void handleCommand(){
   Serial.print(epochTime);
   Serial.print(" | ");
   Serial.println(formattedTime);
-  int moveID = postBody.toInt(); 
+  int moveID = postBody.toInt();
   currentStates = moveArm(moveID, servo1, servo2, servo3, servo4, servo5, currentStates);
   printArmStates(currentStates);
 
@@ -113,7 +113,7 @@ void setup(void){
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 
-  if (MDNS.begin("esp8266")) {
+  if (MDNS.begin("myesp")) {
     Serial.println("MDNS responder started");
   }
 
@@ -159,7 +159,7 @@ void loop(void){
   if(Serial.available()) // if there is data comming
   {
     int pos = Serial.readStringUntil('\n').toInt(); // read string until meet newline character
-    servo1.write(pos);
+    servo4.write(pos);
     
   }
 }

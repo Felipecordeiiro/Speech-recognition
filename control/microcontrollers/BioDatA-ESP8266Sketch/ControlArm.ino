@@ -72,24 +72,68 @@ ArmStates rightFunction(Servo& servo1, Servo& servo2, Servo& servo3, Servo& serv
 
 
 ArmStates downFunction(Servo& servo1, Servo& servo2, Servo& servo3, Servo& servo4, Servo& servo5, ArmStates& currentStates) {
+  int pos2 = currentStates.s2 - standardAngulation;
+  if (pos2 < 0) {
+    return currentStates;
+  }
+  else {
+    Serial.println("VOU MOVER O BRAÇO PARA BAIXO...");
+    servo2.write(pos2); // s2 - angulo padrão (menos)
+  }
+
+  currentStates.s2 = pos2;
+
   return currentStates;
 }
 
 
 
 ArmStates upFunction(Servo& servo1, Servo& servo2, Servo& servo3, Servo& servo4, Servo& servo5, ArmStates& currentStates) {
+  int pos2 = currentStates.s2 + standardAngulation;
+  if (pos2 > 180) {
+    return currentStates;
+  }
+  else {
+    Serial.println("VOU MOVER O BRAÇO PARA CIMA...");
+    servo2.write(pos2); // s2 + angulo padrão (menos)
+  }
+
+  currentStates.s2 = pos2;
+
   return currentStates;
 }
 
 
 
 ArmStates openClaw(Servo& servo1, Servo& servo2, Servo& servo3, Servo& servo4, Servo& servo5, ArmStates& currentStates) {
+  int pos4 = currentStates.s4 + standardAngulation;
+  // OOOU ===> setar para 180
+  if (pos4 > 180) {
+    return currentStates;
+  }
+  else {
+    Serial.println("VOU ABRIR A GARRA...");
+    servo4.write(pos4);
+  }
+
+  currentStates.s4 = pos4;
   return currentStates;
 }
 
 
 
 ArmStates closeClaw(Servo& servo1, Servo& servo2, Servo& servo3, Servo& servo4, Servo& servo5, ArmStates& currentStates) {
+  int pos4 = currentStates.s4 - standardAngulation;
+  // OOOU ===> setar para 0
+  if (pos4 < 0) {
+    return currentStates;
+  }
+  else {
+    Serial.println("VOU FECHAR A GARRA...");
+    servo4.write(pos4);
+  }
+
+  currentStates.s4 = pos4;
   return currentStates;
 }
 
