@@ -35,8 +35,8 @@ ArmStates moveArm(int moveID, Servo& servo1, Servo& servo2, Servo& servo3, Servo
 ArmStates leftFunction(Servo& servo1, Servo& servo2, Servo& servo3, Servo& servo4, Servo& servo5, ArmStates& currentStates) {
   int pos1 = currentStates.s1 + standardAngulation;
   // caso a posição tenha angulação maior que 180, o estado não é alterado
-  // OOOU ===> setar para 180
-  if (pos1 > 180) {
+  // OOOU ===> setar para 150
+  if (pos1 > 150) {
     return currentStates;
   }
   else {
@@ -90,7 +90,7 @@ ArmStates downFunction(Servo& servo1, Servo& servo2, Servo& servo3, Servo& servo
 
 ArmStates upFunction(Servo& servo1, Servo& servo2, Servo& servo3, Servo& servo4, Servo& servo5, ArmStates& currentStates) {
   int pos2 = currentStates.s2 + standardAngulation;
-  if (pos2 > 180) {
+  if (pos2 > 150) {
     return currentStates;
   }
   else {
@@ -108,7 +108,7 @@ ArmStates upFunction(Servo& servo1, Servo& servo2, Servo& servo3, Servo& servo4,
 ArmStates openClaw(Servo& servo1, Servo& servo2, Servo& servo3, Servo& servo4, Servo& servo5, ArmStates& currentStates) {
   int pos4 = currentStates.s4 + standardAngulation;
   // OOOU ===> setar para 180
-  if (pos4 > 180) {
+  if (pos4 > 120) {
     return currentStates;
   }
   else {
@@ -146,6 +146,7 @@ ArmStates brushing(Servo& servo1, Servo& servo2, Servo& servo3, Servo& servo4, S
 
 
 void printArmStates(const ArmStates& states) {
+    Serial.println(standardAngulation);
     Serial.print("s1: ");
     Serial.println(states.s1);
     Serial.print("s2: ");

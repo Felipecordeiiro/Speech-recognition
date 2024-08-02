@@ -1,8 +1,6 @@
 #ifndef ARMCONTROL_H
 #define ARMCONTROL_H
 
-int standardAngulation = 30;
-
 // Estrutura para armazenar os estados dos servos do braço robótico
 struct ArmStates {
     int s1;

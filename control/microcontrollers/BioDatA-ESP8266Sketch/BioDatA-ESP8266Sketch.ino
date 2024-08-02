@@ -27,12 +27,15 @@
 #define ServoPIN2 D2
 #define ServoPIN3 D3
 #define ServoPIN4 D4
-#define ServoPIN5 D6
+#define ServoPIN5 D5
 
+int standardAngulation = 60;
+int subtleAngle = 30;
+bool subtle = false;
 
 // Wifi setup
-const char* ssid = "NETCOMFIBRA_REGINALDO";
-const char* password = "251114223023";
+const char* ssid = "Duque";
+const char* password = "10203040";
 ESP8266WebServer server(80);
 
 // Define NTP Client to get time
@@ -84,6 +87,8 @@ void handleCommand(){
   Serial.print(epochTime);
   Serial.print(" | ");
   Serial.println(formattedTime);
+  Serial.print("standardAngulagion: ");
+  Serial.println(standardAngulation);
   int moveID = postBody.toInt();
   currentStates = moveArm(moveID, servo1, servo2, servo3, servo4, servo5, currentStates);
   printArmStates(currentStates);
@@ -96,7 +101,6 @@ void handleCommand(){
 }
 
 void setup(void){
-
   Serial.begin(115200);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
@@ -155,11 +159,12 @@ void setup(void){
 }
 
 void loop(void){
+  Serial.println("ATUAL");
   server.handleClient();
   if(Serial.available()) // if there is data comming
   {
     int pos = Serial.readStringUntil('\n').toInt(); // read string until meet newline character
-    servo4.write(pos);
+    servo1.write(pos);
     
   }
 }
